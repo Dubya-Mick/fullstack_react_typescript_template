@@ -13,6 +13,7 @@ app.get('/', (req: Request, res: Response) => {
   res.status(200).sendFile(path.join(__dirname, '../build/index.html'));
 });
 
+// testing the docker command
 app.get(
   '/api',
   testController.showContainers,

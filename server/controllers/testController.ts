@@ -2,8 +2,10 @@ import { Request, Response, NextFunction } from 'express';
 import util from 'util';
 import * as child_process from 'child_process';
 
+// make the terminal commands return normal thenable promises
 const exec = util.promisify(child_process.exec);
 
+// controller basically identical to normal controller = {} setup with controller.thing = function
 const testController = (() => {
   const test = (req: Request, res: Response, next: NextFunction) => {
     console.log('the middleware is speaking');

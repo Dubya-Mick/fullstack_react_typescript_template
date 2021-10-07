@@ -1,5 +1,4 @@
-const path = require('path')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
+const path = require('path');
 
 module.exports = {
   mode: process.env.NODE_ENV,
@@ -13,19 +12,18 @@ module.exports = {
   },
 
   resolve: {
-    extensions: ['.tsx', '.ts', '.js'], // allows for omission of file extensiosn when importing
+    extensions: ['.tsx', '.ts', '.js'], // allows for omission of file extensions when importing
   },
-
 
   devServer: {
     static: {
       publicPath: '/',
-      directory: path.resolve(__dirname, 'build')
+      directory: path.resolve(__dirname, 'build'),
     },
     port: 8080,
     proxy: {
       '*': 'http://localhost:3000/',
-    }
+    },
   },
 
   module: {
@@ -49,12 +47,4 @@ module.exports = {
       },
     ],
   },
-
-
-  // with this plugin, no need to specify script tag in html file
-  // plugins: [
-  //   new HtmlWebpackPlugin({
-  //     template: path.resolve(__dirname, './src/index.html'),
-  //   }),
-  // ],
-}
+};

@@ -1,13 +1,37 @@
 import './app.css';
-import IMAGE from './dog.png';
+import IMAGE from '../assets/dog.png';
 import ForceGraph2D from 'react-force-graph-2d';
 
 export const App = () => {
-  const testExec = () => {
-    fetch('/api')
-      .then((res) => res.json())
-      .then((stuff) => console.log(stuff));
-  };
+  const containers = [
+    {
+      id: 'jsebf',
+      name: 'Mongo_DB',
+      ipAddress: '9849834',
+    },
+    {
+      id: 'jsebfdedsd',
+      name: 'A_cool_app',
+      ipAddress: '9849834',
+    },
+    {
+      id: 'jsebfsefs',
+      name: 'justified_platypus',
+      ipAddress: '9849834',
+    },
+    {
+      id: 'jsebfsefs',
+      name: 'burger_boy',
+      ipAddress: '9849834',
+    },
+    {
+      id: 'jsebfsef',
+      name: 'Boombox_DB',
+      ipAddress: '9889834',
+    },
+  ];
+
+  const networkName = 'my_best_network';
 
   const data = {
     nodes: [
@@ -52,18 +76,45 @@ export const App = () => {
     ],
   };
 
+  function createGraphData(
+    containers: { id: string; name: string; ipAddress: string }[],
+    networkName: string
+  ) {
+    const containerNodes = containers.map((container) => {
+      return {
+        id: container.name,
+        type: 'container',
+      };
+    });
+
+    const nodes = [{ id: networkName, type: 'network' }, ...containerNodes];
+    const links = containers.map((container) => {
+      return {
+        source: networkName,
+        target: container.name,
+      };
+    });
+
+    return {
+      nodes: nodes,
+      links: links,
+    };
+  }
+
+  const graphData = createGraphData(containers, networkName);
+
   return (
     <>
       <h1 className="test">Fullstack React Typescript</h1>
       <img src={IMAGE} alt="dog" />
       <ForceGraph2D
-        graphData={data}
+        graphData={graphData}
         nodeLabel={'id'}
         width={500}
         height={500}
         nodeAutoColorBy={'type'}
       />
-      <button onClick={testExec}>Test Docker Terminal</button>
+      <button>Test Docker Terminal</button>
     </>
   );
 };
